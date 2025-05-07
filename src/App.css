@@ -1,0 +1,114 @@
+
+
+/* 중앙 정렬 전체 Wrapper */
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo {
+  margin-right: 40px;
+}
+/* 로고와 검색창 라인 */
+.logo-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 0vw;
+}
+
+/* 검색 입력창 너비 조정 */
+.search-container {
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+/* 프로필 메뉴 우측 정렬 */
+.profile-menu {
+  display: flex;
+  margin-left: auto;
+  gap: 20px;
+  align-items: center;
+}
+
+/* auth-menu 우상단 배치 */
+.menu-list {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.container {
+  margin: 20px;
+}
+/* 밑줄을 전체 너비로 확장 */
+.navbar {
+  border-bottom: 2px solid #ccc;
+  width: 100vw;      /* 뷰포트 너비로 확장 */
+  position: relative; /* 필요시 layout 기준 */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: 18vw;
+}
+
+.navbar-nav {
+  gap: 50px;
+  margin-left: 100px;
+}
+
+.comment {
+  display: flex;
+  gap: 50px;
+}
+.comment-wrapper {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-wrapper {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.footer-line {
+  height: 2px;
+  background-color: #ccc;
+  width: 100%;
+}
+
+.footer-container {
+  height: 150px;
+  background-color: rgba(235, 235, 235, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  padding-top: 120px;
+}
+/* 별 관련 */
+.rating {
+  display: flex;
+}
+
+.temp {
+  margin: 20px;
+  width: 25%;
+}
+
+.card-container .row {
+  display: flex;
+  justify-content: center;  /* 가로 가운데 */
+  align-items: center;      /* 세로 가운데 (높이 조건 필요) */
+  flex-wrap: wrap;          /* 카드가 많으면 줄바꿈 */
+  padding: 20px;
+}
