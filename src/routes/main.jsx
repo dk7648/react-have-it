@@ -1,10 +1,16 @@
 import Card from "../components/Card.jsx";
 import { Container, Row } from "react-bootstrap";
 import "./slider.css"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import Slider from "react-slick";
 import Star from "../components/star.jsx";
 function Main(props) {
+
+    let [habits, setHabits] = useState([]);
+    let [comments, setComments] = useState([]);
+
     const settings = {
         dots: true, // 원형 네비게이션 표시
         infinite: true, // 무한 슬라이드
@@ -25,7 +31,49 @@ function Main(props) {
         ]
       };
       
-    console.log(props.items);
+
+
+    const fetchHabitsData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/habit/top', {
+          withCredentials: true
+        });
+  
+        console.log("서버 응답:", response.data);
+        // 서버에서 사용자 정보를 보내줄 경우 아래처럼 상태 업데이트 가능
+        var newHabits = [...habits, ...response.data]
+        setHabits(newHabits);
+      } catch (error) {
+        console.error('사용자 정보 조회 실패:', error.response?.data || error.message);
+      }
+    };
+    
+    const fetchCommentsData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/comment/top', {
+          withCredentials: true
+        });
+  
+        console.log("서버 응답:", response.data);
+        // 서버에서 사용자 정보를 보내줄 경우 아래처럼 상태 업데이트 가능
+        var newComments = [...comments, ...response.data]
+        setComments(newComments);
+      } catch (error) {
+        console.error('사용자 정보 조회 실패:', error.response?.data || error.message);
+      }
+    };
+
+    useEffect(() => {
+      fetchHabitsData();
+      fetchCommentsData();
+    }, []);
+
+    useEffect(() => {
+      console.log(habits);
+    }, [habits]);
+    useEffect(() => {
+      console.log(comments);
+    }, [comments]);
   return (
     <div>
       <div className="notice-slider-wrapper">
@@ -45,7 +93,7 @@ function Main(props) {
       <h4>최근 추가된 습관들</h4>
       <Container>
         <Row>
-          {props.habits.slice(-6).map((target, i) => {
+          {habits.map((target, i) => {
             return (
               <>
                 <Card navigate={props.navigate} key={i} item={target} />
@@ -57,12 +105,12 @@ function Main(props) {
       <h4>최근 작성된 후기들</h4>
 
       <div className="comment-wrapper"> 
-        {props.comments.slice(-4).map((item) => (
+        {comments.map((item) => (
           <div className="comment">
-            <Star rating={item.rating} />
-            <h5>{item.author}</h5>
+            <Star rating={item.rate} />
+            <h5>{item.member.username}</h5>
             <p>{item.content}</p>
-            <p>{item.date}</p>
+            <p>{item.created?.substring(0,10)}</p>
           </div>
         ))}
       </div>

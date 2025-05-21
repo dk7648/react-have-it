@@ -6,7 +6,15 @@ function Star(props) {
       {Array.from({ length: props.rating }, (_, i) => (
         <div key={i} >
           <img
-            src={"https://codingapple1.github.io/shop/shoes1.jpg"}
+            src={"/yellow_star.png"}
+            width="30"
+          />
+        </div>
+      ))}
+      {Array.from({ length: 5-props.rating }, (_, i) => (
+        <div key={i} >
+          <img
+            src={"/empty_star.png"}
             width="30"
           />
         </div>
